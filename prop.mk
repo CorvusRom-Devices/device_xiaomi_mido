@@ -263,3 +263,19 @@ PRODUCT_PROPERTY_OVERRIDES += \
 
 # QC framework value-adds
 ro.vendor.qti.va_aosp.support=1
+    ro.netflix.bsp_rev=Q660-13149-1
+
+# Dirac algo tsx 9/12
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.dirac.acs.controller=qem \
+    persist.dirac.acs.storeSettings=1 \
+    persist.dirac.acs.ignore_error=1
+
+# Dirac headset effect
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.audio.soundfx.dirac=true \
+    persist.audio.dirac.speaker=true
+# Fling Velocity
+PRODUCT_PROPERTY_OVERRIDES += \
+ro.min.fling_velocity=160 \
+ro.max.fling_velocity=20000
