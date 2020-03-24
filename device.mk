@@ -145,6 +145,9 @@ PRODUCT_PACKAGES += \
 # Dex
 PRODUCT_DEXPREOPT_SPEED_APPS += \
     SystemUI
+ # Charger Images
+PRODUCT_PACKAGES += \
+    product_charger_res_images
 
 # Display
 PRODUCT_PACKAGES += \
