@@ -52,6 +52,9 @@ BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 #TARGET_KERNEL_CLANG_COMPILE := true
 TARGET_KERNEL_SOURCE := kernel/xiaomi/mido
 
+# Lockscreen Charging
+BOARD_GLOBAL_CFLAGS += -DBATTERY_REAL_INFO
+
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
 
