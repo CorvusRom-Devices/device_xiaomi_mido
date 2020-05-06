@@ -149,12 +149,6 @@ on property:init.svc.zygote=running
 on property:init.svc.zygote=restarting
     stop ppd
 
-service energy-awareness /vendor/bin/energy-awareness
-    class main
-    user root
-    group system
-    oneshot
-
 service vendor.hvdcp_opti /vendor/bin/hvdcp_opti
     class main
     user root
@@ -169,9 +163,18 @@ on charger
     start thermal-engine
 
 on boot
+
+    # Create an stune group for the camera-daemon
+    mkdir /dev/stune/camera-daemon
+    write /dev/stune/camera-daemon/schedtune.prefer_idle 1
+    write /dev/stune/camera-daemon/schedtune.boost 0
+    chown system system /dev/stune/camera-daemon
+    chown system system /dev/stune/camera-daemon/tasks
+    chmod 0660 /dev/stune/camera-daemon/tasks
+
 # Update cpusets on boot and we want better load balancing
     write /dev/cpuset/top-app/cpus 0-7
-    write /dev/cpuset/foreground/cpus 0-6
+    write /dev/cpuset/foreground/cpus 0-3
     write /dev/cpuset/background/cpus 0-1
     write /dev/cpuset/system-background/cpus 0-3
     write /dev/cpuset/restricted/cpus 0-3
@@ -191,6 +194,11 @@ on boot
    chmod 0666 /sys/class/power_supply/battery/charging_enabled 
    chown system system /sys/class/power_supply/battery/input_suspend 
    chmod 0666 /sys/class/power_supply/battery/input_suspend
+
+    # Tune vm
+    write /proc/sys/vm/vfs_cache_pressure 75
+    write /proc/sys/vm/user_reserve_kbytes 0
+    write /proc/sys/vm/admin_reserve_kbytes 0
 
 # access permission for wlan
     chown system system /mnt/vendor/persist/WCNSS_qcom_wlan_nv.bin
