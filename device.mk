@@ -150,6 +150,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8953 \
     memtrack.msm8953 \
     libdisplayconfig \
+    libvulkan \
     liboverlay \
     libqdMetaData.system \
     libgenlock \
