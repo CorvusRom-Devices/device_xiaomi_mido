@@ -68,7 +68,6 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String USB_FASTCHARGE_PATH = "/sys/kernel/fast_charge/force_fast_charge";
     public static final String PREF_KEY_FPS_INFO = "fps_info";
 
-    public static final String CATEGORY_TOUCHBOOST = "msm_touchboost";
     public static final String PREF_MSM_TOUCHBOOST = "touchboost";
     public static final String MSM_TOUCHBOOST_PATH = "/sys/module/msm_performance/parameters/touchboost";
 
@@ -198,7 +197,7 @@ public class DeviceSettings extends PreferenceFragment implements
             mTouchboost.setChecked(FileUtils.getFileValueAsBoolean(MSM_TOUCHBOOST_PATH, true));
             mTouchboost.setOnPreferenceChangeListener(this);
         } else {
-            getPreferenceScreen().removePreference(findPreference(CATEGORY_TOUCHBOOST));
+            getPreferenceScreen().removePreference(findPreference(PREF_MSM_TOUCHBOOST));
         }
 
         mGPUBOOST = (SecureSettingListPreference) findPreference(PREF_GPUBOOST);
