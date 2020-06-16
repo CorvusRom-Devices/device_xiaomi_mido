@@ -198,3 +198,17 @@ wifi.interface=wlan0
 # Wifi-Display
 PRODUCT_PROPERTY_OVERRIDES += \
 persist.sys.wfd.virtual=0
+
+# USB debugging
+PRODUCT_PROPERTY_OVERRIDES += \
+persist.sys.usb.config=mtp,adb \
+ro.adb.secure=0 \
+ro.secure=0 \
+ro.debuggable=1
+
+# Dirac
+persist.dirac.acs.controller=qem \
+persist.dirac.acs.storeSettings=1 \
+persist.dirac.acs.ignore_error=1 \
+ro.audio.soundfx.dirac=true \
+persist.audio.dirac.speaker=true

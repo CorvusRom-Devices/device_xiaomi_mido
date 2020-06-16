@@ -1254,3 +1254,8 @@ vendor/lib/libwfdhaldsmanager.so|fdd9d1c5a7e75684ad2039e0ce24a1e5ee308833
 vendor/lib/libwfdhdcpcp.so|a87af0f216f9761d513bab6337783a691b02fd3f
 vendor/lib/libwfdmmservice.so|f180f820e507d7ed2676b0d66d6d63cb74458563
 vendor/lib/libwfdmodulehdcpsession.so|4800ec57f1a546200389b98221145a310c5d6aca
+
+# Dirac
+vendor/etc/diracmobile.config
+lib/libDiracAPI_SHARED.so:vendor/lib/libDiracAPI_SHARED.so
+lib/soundfx/libdirac.so:vendor/lib/soundfx/libdirac.so
