@@ -72,6 +72,9 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String PREF_MSM_TOUCHBOOST = "touchboost";
     public static final String MSM_TOUCHBOOST_PATH = "/sys/module/msm_performance/parameters/touchboost";
 
+    public static final String PREF_GPUBOOST = "gpuboost";
+    public static final String GPUBOOST_SYSTEM_PROPERTY = "persist.gpuboost.profile";
+
     private CustomSeekBarPreference mTorchBrightness;
     private VibratorStrengthPreference mVibratorStrength;
     private Preference mKcal;
@@ -87,6 +90,7 @@ public class DeviceSettings extends PreferenceFragment implements
     private SecureSettingSwitchPreference mFastcharge;
     private SecureSettingSwitchPreference mBacklightDimmer;
     private SecureSettingSwitchPreference mTouchboost;
+    private SecureSettingListPreference mGPUBOOST;
     private static Context mContext;
 
     @Override
@@ -194,6 +198,11 @@ public class DeviceSettings extends PreferenceFragment implements
             getPreferenceScreen().removePreference(findPreference(CATEGORY_TOUCHBOOST));
         }
 
+        mGPUBOOST = (SecureSettingListPreference) findPreference(PREF_GPUBOOST);
+        mGPUBOOST.setValue(FileUtils.getStringProp(GPUBOOST_SYSTEM_PROPERTY, "0"));
+        mGPUBOOST.setSummary(mGPUBOOST.getEntry());
+        mGPUBOOST.setOnPreferenceChangeListener(this);
+
         SwitchPreference fpsInfo = (SwitchPreference) findPreference(PREF_KEY_FPS_INFO);
         fpsInfo.setChecked(prefs.getBoolean(PREF_KEY_FPS_INFO, false));
         fpsInfo.setOnPreferenceChangeListener(this);
@@ -260,6 +269,12 @@ public class DeviceSettings extends PreferenceFragment implements
 
             case PREF_MSM_TOUCHBOOST:
                 FileUtils.setValue(MSM_TOUCHBOOST_PATH, (boolean) value);
+                break;
+
+            case PREF_GPUBOOST:
+                mGPUBOOST.setValue((String) value);
+                mGPUBOOST.setSummary(mGPUBOOST.getEntry());
+                FileUtils.setStringProp(GPUBOOST_SYSTEM_PROPERTY, (String) value);
                 break;
 
             case PREF_KEY_FPS_INFO:
