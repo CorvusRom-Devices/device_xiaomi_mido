@@ -38,7 +38,8 @@ import com.xiaomi.parts.preferences.VibratorStrengthPreference;
 public class DeviceSettings extends PreferenceFragment implements
         Preference.OnPreferenceChangeListener {
 
-    final static String PREF_TORCH_BRIGHTNESS = "torch_brightness";
+    public static final String KEY_YELLOW_TORCH_BRIGHTNESS = "yellow_torch_brightness";
+    public static final String KEY_WHITE_TORCH_BRIGHTNESS = "white_torch_brightness";
     public static final String TORCH_1_BRIGHTNESS_PATH = "/sys/class/leds/led:torch_0/max_brightness";
     public static final String TORCH_2_BRIGHTNESS_PATH = "/sys/class/leds/led:torch_1/max_brightness";
 
@@ -91,12 +92,15 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String PREF_CPUBOOST = "cpuboost";
     public static final String CPUBOOST_SYSTEM_PROPERTY = "persist.cpuboost.profile";
 
-    private CustomSeekBarPreference mTorchBrightness;
     private SecureSettingSwitchPreference mHighAudio;
     private SecureSettingSwitchPreference mMsmThermal;
     private SecureSettingSwitchPreference mCoreControl;
     private SecureSettingSwitchPreference mVddRestrict;
     private SecureSettingListPreference mCPUCORE;
+    private CustomSeekBarPreference mWhiteTorchBrightness;
+    private CustomSeekBarPreference mYellowTorchBrightness;
+    private LedBlinkPreference mLedBlink;
+    private YellowFlashPreference mYellowFlash;
     private VibratorStrengthPreference mVibratorStrength;
     private Preference mKcal;
     private SecureSettingListPreference mSPECTRUM;
@@ -123,10 +127,13 @@ public class DeviceSettings extends PreferenceFragment implements
 
         String device = FileUtils.getStringProp("ro.build.product", "unknown");
 
-        mTorchBrightness = (CustomSeekBarPreference) findPreference(PREF_TORCH_BRIGHTNESS);
-        mTorchBrightness.setEnabled(FileUtils.fileWritable(TORCH_1_BRIGHTNESS_PATH) &&
-                FileUtils.fileWritable(TORCH_2_BRIGHTNESS_PATH));
-        mTorchBrightness.setOnPreferenceChangeListener(this);
+        mWhiteTorchBrightness = (CustomSeekBarPreference) findPreference(KEY_WHITE_TORCH_BRIGHTNESS);
+        mWhiteTorchBrightness.setEnabled(FileUtils.fileWritable(TORCH_1_BRIGHTNESS_PATH));
+        mWhiteTorchBrightness.setOnPreferenceChangeListener(this);
+
+        mYellowTorchBrightness = (CustomSeekBarPreference) findPreference(KEY_YELLOW_TORCH_BRIGHTNESS);
+        mYellowTorchBrightness.setEnabled(FileUtils.fileWritable(TORCH_2_BRIGHTNESS_PATH));
+        mYellowTorchBrightness.setOnPreferenceChangeListener(this);
 
         PreferenceCategory displayCategory = (PreferenceCategory) findPreference(CATEGORY_DISPLAY);
 
@@ -279,8 +286,11 @@ public class DeviceSettings extends PreferenceFragment implements
     public boolean onPreferenceChange(Preference preference, Object value) {
         final String key = preference.getKey();
         switch (key) {
-            case PREF_TORCH_BRIGHTNESS:
+            case KEY_WHITE_TORCH_BRIGHTNESS:
                 FileUtils.setValue(TORCH_1_BRIGHTNESS_PATH, (int) value);
+                break;
+
+            case KEY_YELLOW_TORCH_BRIGHTNESS:
                 FileUtils.setValue(TORCH_2_BRIGHTNESS_PATH, (int) value);
                 break;
 
