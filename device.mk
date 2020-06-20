@@ -171,6 +171,9 @@ PRODUCT_PACKAGES += \
 # Device-specific settings
 PRODUCT_PACKAGES += \
     XiaomiParts
+# Dirac is de wae!
+PRODUCT_PACKAGES += \
+    Dirac
 
 # DRM
 PRODUCT_PACKAGES += \
