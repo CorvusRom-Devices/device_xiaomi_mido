@@ -56,3 +56,8 @@ allow system_app sysfs_leds:dir search;
 #allow system_app sysfs_leds:file { open getattr write };
 
 allow system_app sysfs_msm_perf:dir { search };
+
+# Allow Battery Health
+allow system_app system_data_file:dir { write };
+allow system_app sysfs_battery_supply:dir search;
+allow system_app sysfs_battery_supply:file { open read getattr };
