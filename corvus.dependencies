@@ -1,0 +1,6 @@
+  {
+    "remote":      "github",
+    "repository":  "Rafiester/kernel_xiaomi_msm8953-3.18",
+    "target_path": "kernel/xiaomi/mido",
+    "branch":      "dev/ten-eas"
+  },
