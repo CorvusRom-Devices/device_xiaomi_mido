@@ -43,9 +43,6 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String TORCH_1_BRIGHTNESS_PATH = "/sys/class/leds/led:torch_0/max_brightness";
     public static final String TORCH_2_BRIGHTNESS_PATH = "/sys/class/leds/led:torch_1/max_brightness";
 
-    public static final String PREF_CHARGING_LED = "charging_led";
-    public static final String CHARGING_LED_PATH = "/sys/class/leds/charging/max_brightness";
-
     public static final String PREF_BACKLIGHT_DIMMER = "backlight_dimmer";
     public static final String BACKLIGHT_DIMMER_PATH = "/sys/module/mdss_fb/parameters/backlight_dimmer";
 
@@ -93,14 +90,13 @@ public class DeviceSettings extends PreferenceFragment implements
     public static final String CPUBOOST_SYSTEM_PROPERTY = "persist.cpuboost.profile";
 
     private SecureSettingSwitchPreference mHighAudio;
+
+    private CustomSeekBarPreference mWhiteTorchBrightness;
+    private CustomSeekBarPreference mYellowTorchBrightness;
     private SecureSettingSwitchPreference mMsmThermal;
     private SecureSettingSwitchPreference mCoreControl;
     private SecureSettingSwitchPreference mVddRestrict;
     private SecureSettingListPreference mCPUCORE;
-    private CustomSeekBarPreference mWhiteTorchBrightness;
-    private CustomSeekBarPreference mYellowTorchBrightness;
-    private LedBlinkPreference mLedBlink;
-    private YellowFlashPreference mYellowFlash;
     private VibratorStrengthPreference mVibratorStrength;
     private Preference mKcal;
     private SecureSettingListPreference mSPECTRUM;
@@ -198,14 +194,6 @@ public class DeviceSettings extends PreferenceFragment implements
         mPreset = (SecureSettingListPreference) findPreference(PREF_PRESET);
         mPreset.setOnPreferenceChangeListener(this);
 
-        if (FileUtils.fileWritable(HIGH_AUDIO_PATH)) {
-            mHighAudio = (SecureSettingSwitchPreference) findPreference(HIGH_PERF_AUDIO);
-            mHighAudio.setChecked(FileUtils.getFileValueAsBoolean(HIGH_AUDIO_PATH, true));
-            mHighAudio.setOnPreferenceChangeListener(this);
-        } else {
-            getPreferenceScreen().removePreference(findPreference(HIGH_PERF_AUDIO));
-        }
-
         mHeadphoneGain = (CustomSeekBarPreference) findPreference(PREF_HEADPHONE_GAIN);
         mHeadphoneGain.setOnPreferenceChangeListener(this);
 
@@ -245,7 +233,6 @@ public class DeviceSettings extends PreferenceFragment implements
         mCPUBOOST.setValue(FileUtils.getStringProp(CPUBOOST_SYSTEM_PROPERTY, "0"));
         mCPUBOOST.setSummary(mCPUBOOST.getEntry());
         mCPUBOOST.setOnPreferenceChangeListener(this);
-
 
         if (FileUtils.fileWritable(MSM_THERMAL_PATH)) {
             mMsmThermal = (SecureSettingSwitchPreference) findPreference(PERF_MSM_THERMAL);
@@ -316,10 +303,6 @@ public class DeviceSettings extends PreferenceFragment implements
                 mSPECTRUM.setValue((String) value);
                 mSPECTRUM.setSummary(mSPECTRUM.getEntry());
                 FileUtils.setStringProp(SPECTRUM_SYSTEM_PROPERTY, (String) value);
-                break;
-
-            case HIGH_PERF_AUDIO:
-                FileUtils.setValue(HIGH_AUDIO_PATH, (boolean) value);
                 break;
 
             case PREF_ENABLE_DIRAC:
