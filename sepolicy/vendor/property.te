@@ -1,2 +1,14 @@
 # Camera
 type vendor_camera_prop, property_type;
+
+# Dirac
+type dirac_prop, property_type;
+
+# Spectrum
+type spectrum_prop, property_type;
+
+# GPUboost
+type gpuboost_prop, property_type;
+
+# CPUboost
+type cpuboost_prop, property_type;
