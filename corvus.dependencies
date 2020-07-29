@@ -1,6 +1,14 @@
+[
   {
-    "remote":      "github",
-    "repository":  "dracarys18/NotKernel_Mido",
-    "target_path": "kernel/xiaomi/mido",
-    "branch":      "10-stable"
+    "repository" : "CorvusRom-Devices/device_xiaomi_mido",
+    "target_path": "vendor/xiaomi",
+    "branch"     : "10"
+    "remote"     : "github"
   },
+  {
+    "repository" : "CorvusRom-Devices/kernel_xiaomi_mido",
+    "target_path": "kernel/xiaomi/mido",
+    "branch"     : "10",
+    "remote"     : "github"
+  }
+]
