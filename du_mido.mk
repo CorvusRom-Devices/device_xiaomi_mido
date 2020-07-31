@@ -24,6 +24,15 @@ $(call inherit-product, device/xiaomi/mido/device.mk)
 # Inherit some common CorvusOS stuff.
 $(call inherit-product, vendor/du/config/common_full_phone.mk)
 
+# Gapps
+TARGET_GAPPS_ARCH := arm64
+
+# Bootanimation Resolution
+TARGET_BOOT_ANIMATION_RES := 1080
+
+# Google Recorder
+TARGET_SUPPORTS_GOOGLE_RECORDER := true
+
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
 PRODUCT_NAME := du_mido
