@@ -24,9 +24,6 @@ $(call inherit-product, device/xiaomi/mido/device.mk)
 # Inherit some common CorvusOS stuff.
 $(call inherit-product, vendor/du/config/common_full_phone.mk)
 
-# Inherit build type
-DU_BUILD_TYPE := OFFICIAL
-
 # Device identifier. This must come after all inclusions
 PRODUCT_DEVICE := mido
 PRODUCT_NAME := du_mido
