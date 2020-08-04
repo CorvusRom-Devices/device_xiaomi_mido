@@ -1,8 +1,8 @@
 [
   {
-    "repository" : "CorvusRom-Devices/device_xiaomi_mido",
+    "repository" : "CorvusRom-Devices/vendor_xiaomi_mido",
     "target_path": "vendor/xiaomi",
-    "branch"     : "10"
+    "branch"     : "10",
     "remote"     : "github"
   },
   {
