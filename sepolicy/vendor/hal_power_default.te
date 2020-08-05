@@ -1,8 +1,6 @@
 # Allow writing to files in /proc/touchpanel
 allow hal_power_default proc_touchpanel:dir search;
 allow hal_power_default proc_touchpanel:file rw_file_perms;
-# EAS PowerHal
-set_prop(hal_power_default, power_prop)
 
 # To do PowerHint.json access
 allow hal_power_default sysfs_devices_system_cpu:file w_file_perms;
@@ -17,10 +15,3 @@ allow hal_power_default sysfs_kgsl:lnk_file r_file_perms;
 allow hal_power_default sysfs_kgsl:file w_file_perms;
 allow hal_power_default sysfs_devfreq:dir search;
 allow hal_power_default sysfs_kgsl:lnk_file read;
-
-# Debugsfs
-allow hal_power_default debugfs_easel:dir search;
-allow hal_power_default debugfs_easel:file r_file_perms;
-allow hal_power_default debugfs_rpm:file r_file_perms;
-
-allow hal_power_default hal_power_default:capability { dac_override };
