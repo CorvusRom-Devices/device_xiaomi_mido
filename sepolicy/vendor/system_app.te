@@ -32,7 +32,7 @@ allow system_app sysfs_leds:dir { search };
 allow system_app sysfs_fastcharge:file { open read getattr write };
 
 allow system_app sysfs:file { read  write };
-allow system_app vendor_file:file { getattr  read };
+#allow system_app vendor_file:file { getattr  read };
 
 allow system_app sysfs_touchboost:file { open read getattr write };
 allow system_app sysfs_msm_perf:dir { search };
@@ -53,6 +53,6 @@ allow system_app sysfs_vddrestrict:file { open read getattr write };
 allow system_app cpucore_prop:property_service set;
 get_prop(system_app, cpucore_prop);
 allow system_app sysfs_leds:dir search;
-allow system_app sysfs_leds:file { open getattr write };
+#allow system_app sysfs_leds:file { open getattr write };
 
 allow system_app sysfs_msm_perf:dir { search };
