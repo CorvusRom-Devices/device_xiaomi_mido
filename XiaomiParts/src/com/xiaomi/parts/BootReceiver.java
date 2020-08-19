@@ -36,6 +36,8 @@ public class BootReceiver extends BroadcastReceiver implements Utils {
         FileUtils.setValue(DeviceSettings.BACKLIGHT_DIMMER_PATH, Settings.Secure.getInt(context.getContentResolver(),
                 DeviceSettings.PREF_BACKLIGHT_DIMMER, 0));
 
+            VibratorStrengthPreference.restore(context);
+
         if (Settings.Secure.getInt(context.getContentResolver(), PREF_ENABLED, 0) == 1) {
             FileUtils.setValue(KCAL_ENABLE, Settings.Secure.getInt(context.getContentResolver(),
                     PREF_ENABLED, 0));
@@ -60,7 +62,6 @@ public class BootReceiver extends BroadcastReceiver implements Utils {
                     PREF_CONTRAST, CONTRAST_DEFAULT) + CONTRAST_OFFSET);
             FileUtils.setValue(KCAL_HUE, Settings.Secure.getInt(context.getContentResolver(),
                     PREF_HUE, HUE_DEFAULT));
-            VibratorStrengthPreference.restore(context);
         }
 
         FileUtils.setValue(DeviceSettings.TORCH_1_BRIGHTNESS_PATH,
