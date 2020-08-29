@@ -448,6 +448,11 @@ PRODUCT_PACKAGES += \
 # XiaomiParts
 PRODUCT_PACKAGES += \
     XiaomiParts
+
 # Recorder
 PRODUCT_PACKAGES += \
     KimciRecorder
+
+# YMusic
+PRODUCT_PACKAGES += \
+    YMusic
